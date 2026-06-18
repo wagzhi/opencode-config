@@ -3,12 +3,12 @@
 个人 [OpenCode](https://opencode.ai) 全局配置方案，包含自定义 agent、skill、MCP 集成和行为指令。支持一键迁移到新机器。
 
 > [!NOTE]
-> **模型订阅说明：** 本配置基于以下订阅方案：
-> - **主模型**：Codex Plus（GPT-5 系列）
-> - **子代理**：OpenCode Go（deepseek、glm 等国产模型）
-> - **补充渠道**：aicodemirror（Claude，部分场景使用）
+> **模型与渠道说明：** 本配置默认按以下使用习惯设计：
+> - **主力模型**：Codex Plus 提供的 GPT-5 系列模型，用于日常开发、复杂推理和主会话工作流
+> - **子代理模型**：OpenCode Go 提供的 deepseek、glm 等国产模型，用于 `@git-agent`、`@api-docs`、`explore` 等低成本、高频调用场景
+> - **补充渠道**：aicodemirror，用于部分更适合 Claude 的任务场景
 >
-> 使用者请根据自身订阅情况调整 `opencode.jsonc` 中的 `provider` 配置和各 agent 的 `model` 字段。模型格式为 `provider/model-id`，例如 `openai/gpt-5`、`github-copilot/claude-sonnet-4.6`。
+> 使用者请根据自己的订阅情况调整 `opencode.jsonc` 中的 `provider` 配置，以及各 agent 的 `model` 字段。模型格式为 `provider/model-id`，例如 `openai/gpt-5`、`opencode-go/deepseek-v4-flash`、`anthropic/claude-sonnet-*`。
 
 ## 目录结构
 
