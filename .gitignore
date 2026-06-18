@@ -8,8 +8,3 @@ package-lock.json
 *.bak
 # 临时执行文件
 *.temp-execution-*
-# antigravity 相关
-antigravity-accounts.json
-antigravity-accounts.json.*.tmp
-antigravity-signature-cache.json
-antigravity-logs/
