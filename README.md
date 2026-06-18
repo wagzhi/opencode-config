@@ -5,8 +5,8 @@
 > [!NOTE]
 > **模型订阅说明：** 本配置基于以下订阅方案：
 > - **主模型**：Codex Plus（GPT-5 系列）
+> - **子代理**：OpenCode Go（deepseek、glm 等国产模型）
 > - **补充渠道**：aicodemirror（Claude，部分场景使用）
-> - **子代理**：OpenCode Go（deepseek-v4-flash 等模型）
 >
 > 使用者请根据自身订阅情况调整 `opencode.jsonc` 中的 `provider` 配置和各 agent 的 `model` 字段。模型格式为 `provider/model-id`，例如 `openai/gpt-5`、`github-copilot/claude-sonnet-4.6`。
 
