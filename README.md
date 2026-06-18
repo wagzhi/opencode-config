@@ -23,8 +23,7 @@
 │   ├── git-agent.md         #   Git 操作自动化
 │   └── gitee-agent.md       #   Gitee 平台集成（issue、PR）
 └── skills/                 # 专业技能
-    ├── plan-spec/           #   计划模式 — 需求拆解、spec 落盘、gitee 同步
-    └── playwright-skill/    #   浏览器自动化测试
+    └── plan-spec/           #   计划模式 — 需求拆解、spec 落盘、gitee 同步
 ```
 
 ## Agent 说明
@@ -41,7 +40,6 @@
 | Skill | 用途 |
 |-------|------|
 | `plan-spec` | 需求分析 → 任务拆解 → spec 落盘 → gitee issue 同步 → 执行回填 |
-| `playwright-skill` | 浏览器自动化：截图、表单测试、登录流、响应式检查、链接验证 |
 
 ## 可选插件
 
@@ -57,7 +55,7 @@
 |----------|:----:|------|
 | context7 | ✅ 启用 | 第三方库/API 文档查询，仅 `@api-docs` 可用 |
 | gitee | ✅ 启用 | Gitee issue/PR 管理，`@gitee-agent` 使用 |
-| chrome_devtools | ✅ 启用 | 浏览器 DevTools 控制，playwright-skill 使用 |
+| chrome_devtools | ✅ 启用 | 浏览器 DevTools 控制 |
 | stitch | ❌ 禁用 | Google Stitch（待启用） |
 | figma | ❌ 禁用 | Figma MCP（待启用） |
 
@@ -89,13 +87,6 @@ opencode
 ```
 
 凭据保存在 `~/.local/share/opencode/auth.json`（不纳入此仓库）。
-
-### 4. 安装 skill 依赖（可选）
-
-```bash
-cd ~/.config/opencode/skills/playwright-skill
-npm run setup
-```
 
 ## 自定义
 
