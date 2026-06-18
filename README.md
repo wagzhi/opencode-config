@@ -42,6 +42,14 @@
 | `plan-spec` | 需求分析 → 任务拆解 → spec 落盘 → gitee issue 同步 → 执行回填 |
 | `playwright-skill` | 浏览器自动化：截图、表单测试、登录流、响应式检查、链接验证 |
 
+## 可选插件
+
+| 插件 | 状态 | 说明 |
+|------|:----:|------|
+| [oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) | ❌ 默认关闭 | 多模型 agent 路由，按任务类型自动切换模型和变体 |
+
+配置文件 `oh-my-openagent.json` 已包含在内，项目如需启用，在 `opencode.jsonc` 中取消注释 `"oh-my-openagent@latest"` 即可。
+
 ## MCP 集成
 
 | MCP 服务 | 状态 | 用途 |
