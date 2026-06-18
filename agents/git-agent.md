@@ -7,9 +7,9 @@ tools:
   read: true
 permission:
   bash:
+    "*": deny
     "git": allow
     "git *": allow
-    "*": deny
   read: allow
 ---
 
