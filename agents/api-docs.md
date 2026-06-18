@@ -1,7 +1,7 @@
 ---
 description: Use this agent when looking up third-party API docs, SDK references, framework documentation, library usage examples, or technical specs via context7.
 mode: subagent
-model: opencode-go/deepseek-v4-flash
+model: opencode-go/deepseek-pro
 permission:
   context7_*: allow
   webfetch: allow
