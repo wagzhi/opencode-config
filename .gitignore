@@ -6,6 +6,8 @@ package-lock.json
 .env
 # 备份文件
 *.bak
+# 临时执行文件
+*.temp-execution-*
 # antigravity 相关
 antigravity-accounts.json
 antigravity-accounts.json.*.tmp
