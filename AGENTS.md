@@ -1,12 +1,16 @@
 Always respond in Chinese-simplified
 
 ## Git operations
-When the task involves local Git operations (e.g., status, diff, log, branch, commit, push, pull, merge), handle them according to the current mode:
 
-- **Build mode**: Invoke `@git-agent` to execute local Git operations.
+When the task involves local Git operations, handle them according to the current mode:
+
+- **Build mode**: Invoke `@git-agent` for Git operations that modify repository state, including `git add`, `git commit`, `git push`, `git pull`, `git branch`, `git merge`, `git rebase`, `git tag`, `git remote add`, `git remote set-url`, and `git remote remove`.
+- **Build mode**: Read-only Git commands may be executed directly by the main agent for inspection, including `git status`, `git diff`, `git log`, `git show`, `git remote -v`, `git rev-parse`, and `git ls-files`.
 - **Plan mode**: Do NOT invoke `@git-agent` to execute Git operations. Only inspect and plan. Read-only Git commands are allowed for analysis, such as `git status`, `git diff`, `git log`, and `git remote -v`.
 
-Plan mode must NOT perform Git write operations, including `git init`, `git add`, `git commit`, `git push`, `git remote add`, `git remote set-url`, `git branch`, `git merge`, or `git rebase`.
+Plan mode must NOT perform Git write operations, including `git init`, `git add`, `git commit`, `git push`, `git pull`, `git remote add`, `git remote set-url`, `git branch`, `git merge`, or `git rebase`.
+
+Before any Git write operation, the main agent must stop and delegate the operation to `@git-agent`.
 
 If the user asks for Git changes while in Plan mode, provide the exact steps and commands to run after switching to Build mode.
 
