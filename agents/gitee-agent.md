@@ -47,3 +47,18 @@ tools:
 - 更新 issue 时确保状态准确反映当前进展
 - 评论内容应简洁明了，包含任务完成情况摘要和相关 commit 信息
 - 创建 PR 时填写清晰的标题和描述，指定正确的源分支和目标分支
+
+## PR 同步与创建规范
+
+创建或更新 PR 前，应先确认源分支和目标分支关系，并遵守以下规则：
+
+- 默认目标主干分支为 `dev`，除非调用方或仓库上下文明确指定其他目标分支。
+- 个人独占功能分支提交 PR 前，推荐先基于最新目标主干分支执行 rebase，以保持提交历史线性并提前解决冲突。
+- 多人共享分支、已被其他开发者拉取依赖的分支、公共分支（如 `main`、`master`、`dev`、`release/*`）禁止执行 rebase 后强推。
+- 共享分支需要同步主干时，应使用 `git merge <target-branch>`，不得使用 rebase + force push。
+- 禁止对 `main`、`master`、`dev` 等公共分支执行 `push -f` 或 `--force-with-lease`。
+- 如需强制更新个人分支，优先使用 `git push --force-with-lease origin <branch>`，避免覆盖远端新增提交。
+- rebase 发生冲突时，必须完成冲突修复、执行 `git add` 和 `git rebase --continue`；无法确认正确修复时应执行 `git rebase --abort` 并停止推进。
+- rebase 完成后，必须要求已完成本地编译、单元测试或项目约定的校验，无报错后再创建或更新 PR。
+- gitee-agent 只负责 Gitee PR 创建、更新、评论、审查和合并等平台操作；涉及 `checkout`、`pull`、`rebase`、`merge`、`push` 等会修改 git 状态的操作，应由主流程委托 git-agent 执行。
+- 创建 PR 描述时，应包含源分支、目标分支、同步方式（rebase 或 merge）、本地校验结果和关键提交摘要。
