@@ -57,7 +57,8 @@ tools:
 - 多人共享分支、已被其他开发者拉取依赖的分支、公共分支（如 `main`、`master`、`dev`、`release/*`）禁止执行 rebase 后强推。
 - 共享分支需要同步主干时，应使用 `git merge <target-branch>`，不得使用 rebase + force push。
 - 禁止对 `main`、`master`、`dev` 等公共分支执行 `push -f` 或 `--force-with-lease`。
-- 如需强制更新个人分支，优先使用 `git push --force-with-lease origin <branch>`，避免覆盖远端新增提交。
+- 首次推送个人独占功能分支时，应使用 `git push -u origin <branch>` 以建立上游跟踪关系，后续可直接使用 `git push` 和 `git pull` 而不必重复指定远程和分支名。
+- 如需强制更新个人分支，优先使用 `git push --force-with-lease -u origin <branch>`，避免覆盖远端新增提交，同时确保上游跟踪关系正确。
 - rebase 发生冲突时，必须完成冲突修复、执行 `git add` 和 `git rebase --continue`；无法确认正确修复时应执行 `git rebase --abort` 并停止推进。
 - rebase 完成后，必须要求已完成本地编译、单元测试或项目约定的校验，无报错后再创建或更新 PR。
 - gitee-agent 只负责 Gitee PR 创建、更新、评论、审查和合并等平台操作；涉及 `checkout`、`pull`、`rebase`、`merge`、`push` 等会修改 git 状态的操作，应由主流程委托 git-agent 执行。
