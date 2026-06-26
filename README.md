@@ -92,7 +92,19 @@
 
 | 插件 | 配置位置 | 安装/加载方式 | 说明 |
 |------|----------|----------------|------|
-| `opencode-skill-creator` | `opencode.jsonc` 的 `plugin` 字段 | OpenCode 启动时按 npm 插件名加载 | 提供 skill 创建、评估、优化工具 |
+| `opencode-skill-creator` | `opencode.jsonc` 的 `plugin` 字段 | 首次通过 `npx opencode-skill-creator` 安装后，OpenCode 启动时按插件名自动加载 | 提供 skill 创建、评估、优化工具 |
+
+### opencode-skill-creator 安装
+
+首次使用需手动执行一次：
+
+```bash
+npx opencode-skill-creator
+```
+
+这会自动更新 `opencode.jsonc` 的 `plugin` 字段，并在 OpenCode 重启后将 skill 文件安装到 `skills/opencode-skill-creator/`。
+
+本仓库已包含安装后的 skill 文件，新机器克隆后无需再次执行 `npx opencode-skill-creator`；只需确保 Node.js 和 npm 已安装，OpenCode 启动时会自动识别该插件。
 
 可选插件：
 
@@ -119,6 +131,33 @@
 | chrome_devtools | ✅ 启用 | 浏览器 DevTools 控制 |
 | stitch | ❌ 禁用 | Google Stitch（待启用） |
 | figma | ❌ 禁用 | Figma MCP（待启用） |
+
+## 分析工具
+
+### opencode-agent-optimizer
+
+用于分析 OpenCode 日志，查看模型使用分布、成本层级和 agent 委托效率。
+
+安装：
+
+```bash
+npm i -g opencode-agent-optimizer
+```
+
+常用命令：
+
+```bash
+# 完整分析与建议
+opencode-agent-optimizer suggest --all
+
+# 最近 7 天使用情况
+opencode-agent-optimizer suggest --all --since $(date -v-7d +%Y-%m-%d)
+
+# 配置与实际模型对比
+opencode-agent-optimizer compare --all
+```
+
+该工具仅读取日志，不修改配置。分析结果中的建议可通过 `opencode-config-audit` skill 评估和落地。
 
 ## 快速开始（新机器）
 
