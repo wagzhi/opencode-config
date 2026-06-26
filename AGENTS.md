@@ -1,23 +1,33 @@
 Always respond in Chinese-simplified
 
-## Git operations
+## Routing
 
-When the task involves local Git operations, handle them according to the current mode:
+Use specialized agents or skills when the task matches their scope:
 
-- **Build mode**: Invoke `@git-agent` for Git operations that modify repository state, including `git add`, `git commit`, `git push`, `git pull`, `git branch`, `git merge`, `git rebase`, `git tag`, `git remote add`, `git remote set-url`, and `git remote remove`.
-- **Build mode**: Read-only Git commands may be executed directly by the main agent for inspection, including `git status`, `git diff`, `git log`, `git show`, `git remote -v`, `git rev-parse`, and `git ls-files`.
-- **Plan mode**: Do NOT invoke `@git-agent` to execute Git operations. Only inspect and plan. Read-only Git commands are allowed for analysis, such as `git status`, `git diff`, `git log`, and `git remote -v`.
+| Task | Delegate To |
+|---|---|
+| Local Git write operations | `@git-agent` |
+| Gitee issues, PRs, reviews, merges, or comments | `@gitee-agent` |
+| Third-party docs, SDK/API references, framework docs | `@doc-agent` |
+| Third-party docs combined with local project code/config/docs | `@ask-agent` |
+| OpenCode config review, migration, agents, skills, plugins, MCP, permissions, model routing | `opencode-config-audit` skill |
 
-Plan mode must NOT perform Git write operations, including `git init`, `git add`, `git commit`, `git push`, `git pull`, `git remote add`, `git remote set-url`, `git branch`, `git merge`, or `git rebase`.
+## Git Operations
 
-Before any Git write operation, the main agent must stop and delegate the operation to `@git-agent`.
+- Read-only Git inspection may be done directly by the main agent: `git status`, `git diff`, `git log`, `git show`, `git remote -v`, `git rev-parse`, `git ls-files`.
+- Git operations that modify repository state must be delegated to `@git-agent`: `git add`, `git commit`, `git push`, `git pull`, `git branch`, `git merge`, `git rebase`, `git tag`, remote changes, and similar operations.
+- In Plan Mode, do not perform Git write operations. Inspect only and provide the exact commands to run later.
 
-If the user asks for Git changes while in Plan mode, provide the exact steps and commands to run after switching to Build mode.
+## Gitee Operations
 
-## Gitee operations
-When the task involves Gitee platform operations (e.g., creating/updating issues, commenting progress, syncing task progress, creating/managing/reviewing/merging pull requests), invoke `@gitee-agent` to handle them.
+- Use `@gitee-agent` for Gitee platform operations, including issue creation/update/commenting, PR creation/review/merge, and syncing task progress.
+- If a task needs both local Git changes and Gitee updates, complete local Git work through `@git-agent` first, then use `@gitee-agent` for Gitee updates.
 
-For tasks that involve both Git and Gitee, use `@git-agent` for local repository Git operations first, then use `@gitee-agent` for Gitee issue or pull request updates.
+## Documentation And Research
 
-## Documentation / API lookup
-When the task involves looking up third-party library documentation, SDK/API references, framework docs, usage examples, or technical specs, invoke `@api-docs`. This agent uses context7 MCP to retrieve up-to-date official documentation.
+- Use `@doc-agent` for pure third-party documentation lookup.
+- Use `@ask-agent` when the answer requires both external documentation and local project context.
+
+## OpenCode Config Maintenance
+
+Use the `opencode-config-audit` skill when reviewing or improving OpenCode configuration under `~/.config/opencode` or `.opencode`.

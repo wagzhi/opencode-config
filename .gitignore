@@ -8,3 +8,5 @@ package-lock.json
 *.bak
 # 临时执行文件
 *.temp-execution-*
+# opencode-skill-creator 本机更新检查缓存
+opencode-skill-creator-update-check.json

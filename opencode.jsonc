@@ -10,6 +10,7 @@
     "context7_*": "deny"
   },
   "plugin": [
+    "opencode-skill-creator"
     // "oh-my-openagent@latest" 仅在需要的项目添加
   ],
   "provider": {
